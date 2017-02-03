@@ -12,8 +12,15 @@ public class Base62 {
 
     private static final int BASE = ALPHABET.length();
 
-    private Base62() {}
+    private Base62() {
+        throw new UnsupportedOperationException();
+    }
 
+    /**
+     * Give a base10 integer, return a String hash which is 62 based
+     * @param i base10 integer
+     * @return a String hash which is 62 based
+     */
     public static String fromBase10(int i) {
         StringBuilder sb = new StringBuilder("");
         if (i == 0) {
@@ -31,6 +38,11 @@ public class Base62 {
         return i / BASE;
     }
 
+    /**
+     * Transforms the given string hash into a base10 integer
+     * @param str string hash in question
+     * @return a base10 integer
+     */
     public static int toBase10(String str) {
         return toBase10(new StringBuilder(str).reverse().toString().toCharArray());
     }

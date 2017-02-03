@@ -14,6 +14,9 @@ import org.springframework.ui.Model;
 import java.util.List;
 
 /**
+ * This class is responsible for the core business logic.
+ * TODO: we should do a better job at error handling but I don't have
+ * enough time right now!
  * Created by haozhexu on 1/30/17.
  */
 public class TinyURLHandler {
@@ -106,6 +109,9 @@ public class TinyURLHandler {
         return url == null ? null : url.getLongURL();
     }
 
+    /**
+     * Simple data structure to make our life a little easy.
+     */
     @Data
     @Accessors(chain = true)
     private static class CheckDBResponse {

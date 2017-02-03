@@ -22,6 +22,8 @@ public class URL {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Setter
+    // TODO: If tons of folks starts to use my tiny url service, I really should use Long as my id
+    // or even BigInteger
     private Integer id;
 
     @Getter
