@@ -1,0 +1,16 @@
+{
+  "name": "TinyUrlWebsiteContent",
+  "scripts": {
+    "postdeploy": "/boot.sh"
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ]
+}
