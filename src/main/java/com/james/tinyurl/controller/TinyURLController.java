@@ -21,5 +21,4 @@ public class TinyURLController {
         model.addAttribute("name", "James");
         return "welcome";
     }
-
 }

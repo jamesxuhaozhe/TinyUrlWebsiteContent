@@ -22,7 +22,7 @@ public class URL {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Setter
-    private Long id;
+    private Integer id;
 
     @Getter
     @Setter

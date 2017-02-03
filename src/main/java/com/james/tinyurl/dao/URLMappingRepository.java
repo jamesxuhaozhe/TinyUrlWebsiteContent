@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Created by haozhexu on 1/30/17.
  */
-public interface URLMappingRepository extends JpaRepository<URL, Long>{
+public interface URLMappingRepository extends JpaRepository<URL, Integer>{
 }

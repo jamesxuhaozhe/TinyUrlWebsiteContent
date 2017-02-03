@@ -46,9 +46,10 @@ public class TinyURLHandler {
     private String getShortHash(String longURL) {
         CheckDBResponse response = checkLongURLinRepo(longURL);
         if (response.isInRepo) {
-            return Base62.encode(response.getLongURL().getId());
+            logger.debug(longURL + " is in our database");
+            return Base62.fromBase10(response.getLongURL().getId());
         } else {
-            return Base62.encode(insertLongURLIntoRepo(longURL));
+            return Base62.fromBase10(insertLongURLIntoRepo(longURL));
         }
     }
 
@@ -73,7 +74,7 @@ public class TinyURLHandler {
      * @param longURL longURL we need to insert into our database
      * @return the inserted id
      */
-    private long insertLongURLIntoRepo(String longURL) {
+    private int insertLongURLIntoRepo(String longURL) {
         URL url = new URL().setLongURL(longURL);
         urlMappingRepository.saveAndFlush(url);
         return url.getId();
@@ -99,7 +100,8 @@ public class TinyURLHandler {
      * @return corresponding long url for the given short hash
      */
     public String retrieveLongURLByShortHash(String shortHash) {
-        long idToQuery = Base62.decode(shortHash);
+        int idToQuery = Base62.toBase10(shortHash);
+        logger.debug(shortHash + " id is " + idToQuery);
         URL url = urlMappingRepository.findOne(idToQuery);
         return url == null ? null : url.getLongURL();
     }
