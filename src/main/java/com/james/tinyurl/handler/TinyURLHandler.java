@@ -30,10 +30,10 @@ public class TinyURLHandler {
      * @return {@code true} if the operation succeeds, {@code false} otherwise
      */
     public boolean generateShortURLHash(String longURL, Model model) {
-        String shortURLHash = null;
+        String shortURLHash;
         boolean isSuccess = false;
         try {
-            shortURLHash = getShortURLHash(longURL);
+            shortURLHash = getShortHash(longURL);
             model.addAttribute("shortURL", shortURLHash);
             isSuccess = true;
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class TinyURLHandler {
         return isSuccess;
     }
 
-    private String getShortURLHash(String longURL) {
+    private String getShortHash(String longURL) {
         CheckDBResponse response = checkLongURLinRepo(longURL);
         if (response.isInRepo) {
             return Base62.encode(response.getLongURL().getId());
@@ -77,6 +77,31 @@ public class TinyURLHandler {
         URL url = new URL().setLongURL(longURL);
         urlMappingRepository.saveAndFlush(url);
         return url.getId();
+    }
+
+    /**
+     * Gets the short hash for the given long url.
+     * @param longURL longURL to be converted to short hash
+     * @return the short hash for the given long url.
+     */
+    public String getShortHashFromLongURL(String longURL) {
+        try {
+            return getShortHash(longURL);
+        } catch (Exception e) {
+            logger.error("Oh no! Something happened when gettting short Hash from Long URL", e);
+        }
+        return null;
+    }
+
+    /**
+     * For the given short Hash, gets corresponding long url.
+     * @param shortHash short hash in question
+     * @return corresponding long url for the given short hash
+     */
+    public String retrieveLongURLByShortHash(String shortHash) {
+        long idToQuery = Base62.decode(shortHash);
+        URL url = urlMappingRepository.findOne(idToQuery);
+        return url == null ? null : url.getLongURL();
     }
 
     @Data
