@@ -22,5 +22,4 @@ public class TinyURLController {
         return "welcome";
     }
 
-    public
 }
