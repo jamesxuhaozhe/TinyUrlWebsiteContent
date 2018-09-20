@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
+ *
+ * A debug controller that helps debugging
  * Created by haozhexu on 1/30/17.
  */
 @Controller
